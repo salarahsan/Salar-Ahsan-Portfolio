@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salar Ahsan — Data Analyst & AI Developer</title>
+<meta name="description" content="Salar Ahsan — Google Certified Data Analyst & AI Automation Developer from Mandi Bahaudin, Pakistan. Data pipelines, AI agents, dashboards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#121410;
+    --bg2:#171a14;
+    --panel:#1c2017;
+    --line:rgba(244,241,232,0.12);
+    --line-hover:rgba(201,243,110,0.4);
+    --cream:#f7f4ec;
+    --muted:#a7b09f;
+    --lime:#c9f36e;
+    --lime-dim:#8fae4f;
+    --paper:#e9e4d4;
+    --paper2:#f4f0e4;
+    --ink:#14170f;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  ::selection{ background:var(--lime); color:#0d0f0c; }
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    cursor:none;
+  }
+  @media (pointer:coarse){ body{ cursor:auto; } }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+  a{ color:inherit; }
+  img,video{ max-width:100%; display:block; }
+
+  /* ---------------- custom cursor ---------------- */
+  #cursor{
+    position:fixed; top:0; left:0; width:16px; height:16px;
+    margin:-8px 0 0 -8px; border-radius:50%; background:var(--lime);
+    pointer-events:none; z-index:999; mix-blend-mode:difference;
+    transition:transform .15s ease, width .2s ease, height .2s ease, margin .2s ease;
+    will-change:transform;
+  }
+  #cursor.big{ width:56px; height:56px; margin:-28px 0 0 -28px; background:var(--cream); }
+  @media (pointer:coarse){ #cursor{ display:none; } }
+
+  /* ---------------- layout shell ---------------- */
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 28px; }
+  section{ position:relative; }
+
+  [data-reveal]{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  [data-reveal].in{ opacity:1; transform:translateY(0); }
+
+  /* ---------------- nav ---------------- */
+  nav{
+    position:sticky; top:16px; z-index:80;
+    padding:0 20px;
+  }
+  .nav-inner{
+    max-width:1140px; margin:0 auto; padding:12px 10px 12px 22px;
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(20,23,17,0.72); backdrop-filter:blur(16px);
+    border:1px solid var(--line); border-radius:100px;
+    box-shadow:0 20px 40px -20px rgba(0,0,0,0.5);
+  }
+  .brand{ font-family:'Fraunces',serif; font-weight:600; font-size:18px; letter-spacing:-0.01em; }
+  .brand span{ color:var(--lime); }
+  .nav-links{ display:flex; gap:28px; font-family:var(--mono); font-size:12px; letter-spacing:.04em; text-transform:uppercase; }
+  .nav-links a{ text-decoration:none; color:var(--muted); position:relative; padding-bottom:3px; transition:color .2s ease; }
+  .nav-links a:hover{ color:var(--cream); }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--lime); transition:width .25s ease; }
+  .nav-links a:hover::after{ width:100%; }
+  @media (max-width:720px){ .nav-links{ display:none; } }
+
+  /* ---------------- hero ---------------- */
+  .hero{ padding:36px 0 60px; }
+
+  .photo-card{
+    position:relative;
+    background:linear-gradient(155deg, var(--paper2), var(--paper));
+    border-radius:26px;
+    overflow:hidden;
+    min-height:520px;
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    color:var(--ink);
+    perspective:1400px;
+    transform-style:preserve-3d;
+    transition:transform .1s linear;
+    will-change:transform;
+  }
+  .orbit-ring{
+    position:absolute; border:1px solid rgba(20,23,15,0.16); border-radius:50%;
+    pointer-events:none; z-index:2;
+  }
+  .ring1{ width:420px; height:420px; top:8%; left:50%; margin-left:-210px; animation:spinRing 30s linear infinite; border-style:dashed; }
+  .ring2{ width:300px; height:300px; bottom:6%; right:6%; animation:spinRing 22s linear infinite reverse; }
+  @keyframes spinRing{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+
+  .photo-row{ display:flex; align-items:flex-start; justify-content:space-between; position:relative; z-index:5; transform:translateZ(30px); }
+  .photo-chip{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
+    background:rgba(20,23,15,0.06); border:1px solid rgba(20,23,15,0.14);
+    padding:9px 16px; border-radius:100px; color:var(--ink);
+  }
+  .photo-name-bg{
+    position:absolute; left:0; right:0; top:50%; transform:translateY(-50%) translateZ(6px);
+    font-family:'Fraunces',serif; font-weight:700; letter-spacing:-0.02em;
+    font-size:clamp(58px, 12vw, 150px); line-height:0.85; color:var(--ink);
+    opacity:0.94; white-space:nowrap; z-index:1; text-align:center;
+    animation:breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe{ 0%,100%{ letter-spacing:-0.02em; opacity:0.94; } 50%{ letter-spacing:-0.005em; opacity:1; } }
+
+  .hero-photo{
+    position:relative; z-index:3; margin:0 auto; height:460px; width:auto;
+    -webkit-mask-image:linear-gradient(to bottom, black 82%, transparent 100%);
+    mask-image:linear-gradient(to bottom, black 82%, transparent 100%);
+    object-fit:contain; object-position:bottom;
+    transform:translateZ(60px);
+    filter:drop-shadow(0 30px 40px rgba(20,23,15,0.25));
+  }
+
+  .word-rotator{
+    position:absolute; z-index:6; top:44%; left:8%;
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:clamp(18px,2.6vw,26px); color:var(--ink);
+    transform:translateZ(80px);
+    opacity:0; transition:opacity .4s ease, transform .4s ease;
+  }
+  .word-rotator span{ color:var(--lime-dim); }
+  .word-rotator.show{ opacity:1; }
+
+  .photo-foot{ display:flex; align-items:flex-end; justify-content:space-between; position:relative; z-index:5; transform:translateZ(30px); }
+  .photo-foot .role{ font-family:'Fraunces',serif; font-style:italic; font-size:19px; }
+  .photo-foot .scroll{ font-family:var(--mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:6px; opacity:.7; }
+  .photo-foot .scroll .arrow{ display:inline-block; animation:bounceArrow 1.6s ease-in-out infinite; }
+  @keyframes bounceArrow{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+
+  @media (max-width:720px){
+    .photo-card{ min-height:auto; padding:20px; }
+    .hero-photo{ height:300px; }
+    .photo-name-bg{ font-size:clamp(38px,14vw,70px); }
+    .word-rotator{ display:none; }
+    .orbit-ring{ display:none; }
+  }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--lime); display:flex; align-items:center; gap:10px; margin:46px 0 22px;
+  }
+  .eyebrow::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--lime); box-shadow:0 0 10px 3px rgba(201,243,110,0.6); }
+  .hero h1{
+    font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.02em;
+    font-size:clamp(38px, 6.4vw, 72px); line-height:1.02;
+  }
+  .hero h1 em{ font-style:italic; font-weight:500; color:var(--lime); }
+  .hero-sub{
+    max-width:640px; margin-top:22px; font-size:clamp(16px,2vw,18px); color:var(--muted); line-height:1.6;
+  }
+  .hero-row{
+    display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:34px;
+  }
+  .btn{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;
+    padding:14px 26px; border-radius:100px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .btn-primary{ background:var(--lime); color:#0d0f0c; font-weight:600; }
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--cream); }
+  .btn-ghost:hover{ border-color:var(--line-hover); transform:translateY(-2px); }
+
+  /* ---------------- marquee ---------------- */
+  .marquee-wrap{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    overflow:hidden; padding:16px 0; margin-top:70px; background:var(--bg2);
+  }
+  .marquee{ display:flex; width:max-content; animation:scroll 26s linear infinite; }
+  .marquee span{
+    font-family:'Fraunces',serif; font-style:italic; font-size:22px; color:var(--muted);
+    padding:0 28px; white-space:nowrap; display:flex; align-items:center; gap:28px;
+  }
+  .marquee span i{ color:var(--lime); font-style:normal; font-family:var(--mono); font-size:14px; }
+  @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ---------------- stats ---------------- */
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); margin-top:0; border:1px solid var(--line); }
+  .stat{ background:var(--bg); padding:26px 20px; text-align:center; }
+  .stat h3{ font-family:'Fraunces',serif; font-size:26px; color:var(--lime); }
+  .stat p{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+  @media (max-width:640px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ---------------- section heads ---------------- */
+  .section{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .head{ display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:52px; flex-wrap:wrap; }
+  .head .num{ font-family:var(--mono); font-size:12px; color:var(--lime); letter-spacing:.1em; }
+  .head h2{ font-family:'Fraunces',serif; font-weight:500; font-size:clamp(30px,4.4vw,48px); margin-top:8px; }
+  .head p{ color:var(--muted); max-width:360px; font-size:14.5px; line-height:1.6; }
+
+  /* ---------------- about ---------------- */
+  .about-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ color:var(--muted); font-size:16.5px; line-height:1.8; margin-bottom:18px; }
+  .about-grid strong{ color:var(--cream); }
+  .cred-list{ border-top:1px solid var(--line); }
+  .cred-item{ display:flex; justify-content:space-between; gap:16px; padding:18px 0; border-bottom:1px solid var(--line); }
+  .cred-item h4{ font-family:'Fraunces',serif; font-weight:500; font-size:16px; }
+  .cred-item span{ font-family:var(--mono); font-size:11.5px; color:var(--muted); white-space:nowrap; }
+
+  /* ---------------- projects ---------------- */
+  .proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
+  @media (max-width:820px){ .proj-grid{ grid-template-columns:1fr; } }
+
+  .proj-card{
+    border:1px solid var(--line); border-radius:18px; overflow:hidden; background:var(--panel);
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .proj-card:hover{ border-color:var(--line-hover); transform:translateY(-4px); }
+  .proj-media{
+    position:relative; aspect-ratio:16/10; background:#0a0c08; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .proj-media video, .proj-media img{ width:100%; height:100%; object-fit:cover; }
+  .proj-play{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.5) 100%);
+    opacity:1; transition:opacity .3s ease; pointer-events:none;
+  }
+  .proj-card:hover .proj-play{ opacity:0; }
+  .play-btn{
+    width:52px; height:52px; border-radius:50%; background:rgba(244,241,232,0.92);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .play-btn svg{ width:18px; height:18px; fill:#0d0f0c; margin-left:2px; }
+
+  .proj-body{ padding:22px 22px 24px; }
+  .proj-index{ font-family:var(--mono); font-size:11px; color:var(--lime); margin-bottom:8px; }
+  .proj-title{ font-family:'Fraunces',serif; font-weight:600; font-size:19px; margin-bottom:8px; }
+  .proj-desc{ color:var(--muted); font-size:13.8px; line-height:1.6; margin-bottom:16px; }
+  .proj-links{ display:flex; gap:14px; }
+  .proj-links a{ font-family:var(--mono); font-size:11.5px; text-decoration:none; color:var(--cream); border-bottom:1px solid var(--line-hover); padding-bottom:2px; }
+
+  /* ---------------- skills ---------------- */
+  .skill-groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+  @media (max-width:820px){ .skill-groups{ grid-template-columns:1fr; } }
+  .skill-group h4{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--lime); margin-bottom:16px; }
+  .pill{ display:inline-block; border:1px solid var(--line); padding:9px 16px; border-radius:100px; font-size:13.5px; margin:0 8px 8px 0; color:var(--cream); }
+
+  /* ---------------- contact ---------------- */
+  .contact-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+  .contact-card{
+    border:1px solid var(--line); border-radius:16px; padding:22px; text-decoration:none;
+    display:flex; flex-direction:column; gap:30px; transition:border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .contact-card:hover{ border-color:var(--line-hover); transform:translateY(-3px); background:var(--panel); }
+  .contact-card .ic{ width:38px; height:38px; border-radius:10px; background:var(--panel); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
+  .contact-card .ic svg{ width:18px; height:18px; stroke:var(--lime); fill:none; stroke-width:1.8; }
+  .contact-card h4{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; }
+  .contact-card p{ font-family:var(--mono); font-size:11px; color:var(--muted); }
+
+  footer{ padding:40px 0; text-align:center; font-family:var(--mono); font-size:11.5px; color:var(--muted); }
+  footer span{ color:var(--lime); }
+
+  /* ---------------- process (stacked words) ---------------- */
+  .process-section{
+    background:#090a07;
+    padding:90px 0;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    border-bottom:1px solid var(--line);
+  }
+  .process-inner{ max-width:1180px; margin:0 auto; padding:0 28px; }
+  .process-word{
+    display:flex; align-items:baseline; gap:40px; flex-wrap:wrap;
+    padding:26px 0; border-bottom:1px solid var(--line);
+    opacity:0.32; transition:opacity .5s ease;
+  }
+  .process-word:last-child{ border-bottom:none; }
+  .process-word.active{ opacity:1; }
+  .process-word h3{
+    font-family:'Fraunces',serif; font-weight:700; letter-spacing:-0.02em;
+    font-size:clamp(46px,8vw,96px); line-height:0.95; color:var(--cream);
+    transition:color .5s ease;
+  }
+  .process-word.active h3{ color:var(--lime); }
+  .process-word p{ max-width:340px; color:var(--muted); font-size:14px; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">Salar<span>.</span>Ahsan</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="mailto:salarahsan06@gmail.com" class="btn btn-ghost" style="padding:10px 20px;">Let's talk</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="photo-card" id="photoCard" data-reveal>
+      <div class="orbit-ring ring1"></div>
+      <div class="orbit-ring ring2"></div>
+      <div class="photo-row">
+        <div class="photo-chip">Available for freelance</div>
+        <div class="photo-chip">Mandi Bahaudin, PK 🇵🇰</div>
+      </div>
+      <div class="photo-name-bg" id="nameBg">SALAR AHSAN</div>
+      <img class="hero-photo" id="heroPhoto" src="salar-cutout.png" alt="Salar Ahsan">
+      <div class="word-rotator" id="wordRotator">Analyze<span>.</span></div>
+      <div class="photo-foot">
+        <div class="role">Data Analyst &amp;<br>AI Developer</div>
+        <div class="scroll">Scroll<br><span class="arrow">↓</span></div>
+      </div>
+    </div>
+
+    <div class="eyebrow" data-reveal>Data Analyst · AI Automation Developer</div>
+    <h1 data-reveal>Turning raw data into <em>actionable insights</em> & intelligent tools.</h1>
+    <p class="hero-sub" data-reveal>Google Certified Data Analyst turning raw, messy datasets into clear decisions — and building autonomous AI agents, dashboards and automations for clients around the world.</p>
+    <div class="hero-row" data-reveal>
+      <a href="#projects" class="btn btn-primary">View projects →</a>
+      <a href="mailto:salarahsan06@gmail.com" class="btn btn-ghost">Say hello</a>
+    </div>
+  </section>
+
+  <div class="marquee-wrap" data-reveal>
+    <div class="marquee">
+      <span><i>●</i>Data Analytics<i>●</i>AI Automation<i>●</i>Dashboards<i>●</i>n8n Workflows<i>●</i>Generative AI<i>●</i>Data Analytics<i>●</i>AI Automation<i>●</i>Dashboards<i>●</i>n8n Workflows<i>●</i>Generative AI</span>
+      <span><i>●</i>Data Analytics<i>●</i>AI Automation<i>●</i>Dashboards<i>●</i>n8n Workflows<i>●</i>Generative AI<i>●</i>Data Analytics<i>●</i>AI Automation<i>●</i>Dashboards<i>●</i>n8n Workflows<i>●</i>Generative AI</span>
+    </div>
+  </div>
+
+  <div class="stats" data-reveal>
+    <div class="stat"><h3>Google</h3><p>Certified Analyst</p></div>
+    <div class="stat"><h3>AI</h3><p>Salar Vision Creator</p></div>
+    <div class="stat"><h3>Advanced</h3><p>AI Power User</p></div>
+    <div class="stat"><h3>2026</h3><p>Skills Active</p></div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="head" data-reveal>
+      <div>
+        <div class="num">01 — About</div>
+        <h2>Curiosity, code<br>and clean data.</h2>
+      </div>
+      <p>A quick look at how I got here — credentials and the path so far.</p>
+    </div>
+    <div class="about-grid">
+      <p data-reveal>I am a passionate <strong>Data Analyst and AI Developer</strong> driven by curiosity and code. I specialize in cleaning, analyzing, and visualizing complex datasets to solve real-world problems. Whether it's building generative AI applications like <strong>Salar Vision AI</strong> or creating interactive dashboards, I bring a creative mindset to technical expertise.</p>
+      <div class="cred-list" data-reveal>
+        <div class="cred-item"><h4>Google Data Analytics Professional Certificate</h4><span>2025</span></div>
+        <div class="cred-item"><h4>Google Prompting Essentials Specialization</h4><span>2025</span></div>
+        <div class="cred-item"><h4>IT Assistant Diploma — TEVTA GTTC Dinga</h4><span></span></div>
+        <div class="cred-item"><h4>Intermediate (FSC Pre-Engineering) — Aspire Group of College</h4><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-section" data-reveal>
+    <div class="process-inner">
+      <div class="process-word" data-active>
+        <h3>Discover</h3>
+        <p>Understand the client's data, goals and constraints before writing a single line of code.</p>
+      </div>
+      <div class="process-word">
+        <h3>Build</h3>
+        <p>Clean pipelines, dashboards and AI agents — shipped with clear docs and no black boxes.</p>
+      </div>
+      <div class="process-word">
+        <h3>Deliver</h3>
+        <p>Tested, deployed and handed over with support — so the work keeps working after launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="head" data-reveal>
+      <div>
+        <div class="num">02 — Selected Work</div>
+        <h2>23 automations &<br>AI projects.</h2>
+      </div>
+      <p>Hover a card to preview. Videos load only when you scroll to them.</p>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="head" data-reveal>
+      <div>
+        <div class="num">03 — Skills</div>
+        <h2>Technical streams.</h2>
+      </div>
+    </div>
+    <div class="skill-groups" data-reveal>
+      <div class="skill-group">
+        <h4>Data</h4>
+        <span class="pill">Python</span><span class="pill">SQL</span><span class="pill">Excel</span>
+      </div>
+      <div class="skill-group">
+        <h4>Visualization</h4>
+        <span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">Dashboards</span>
+      </div>
+      <div class="skill-group">
+        <h4>AI & Automation</h4>
+        <span class="pill">Generative AI (Mistral, FLUX)</span><span class="pill">n8n Workflows</span><span class="pill">Agentic AI</span><span class="pill">Prompt Engineering</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="border-bottom:none;">
+    <div class="head" data-reveal>
+      <div>
+        <div class="num">04 — Contact</div>
+        <h2>Let's build<br>something.</h2>
+      </div>
+      <p>Open for freelance data & AI automation projects.</p>
+    </div>
+    <div class="contact-grid" data-reveal>
+      <a class="contact-card" href="mailto:salarahsan06@gmail.com">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
+        <div><h4>Email</h4><p>salarahsan06@gmail.com</p></div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/salar-ahsan-9b859839b/" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9.5 9H13v1.9h.05c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8-1.7 0-2 1.4-2 2.7V21h-4z" fill="var(--lime)" stroke="none"></path></svg></div>
+        <div><h4>LinkedIn</h4><p>salar-ahsan</p></div>
+      </a>
+      <a class="contact-card" href="https://github.com/salarahsan" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.58 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" fill="var(--lime)" stroke="none"></path></svg></div>
+        <div><h4>GitHub</h4><p>salarahsan</p></div>
+      </a>
+      <a class="contact-card" href="https://x.com/SalarAhsan9up6" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h4.4l4.1 5.6L16.3 3H21l-6.9 8.6L21.5 21H17l-4.5-6.1L7.2 21H2.5l7.3-9.1z" fill="var(--lime)" stroke="none"></path></svg></div>
+        <div><h4>X</h4><p>@SalarAhsan9up6</p></div>
+      </a>
+      <a class="contact-card" href="https://www.fiverr.com/salarahsan0?public_mode=true" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h9M9 3v6M9 9h6a3 3 0 0 1 0 6H9m0-6v9"></path></svg></div>
+        <div><h4>Fiverr</h4><p>salarahsan0</p></div>
+      </a>
+      <a class="contact-card" href="https://www.tiktok.com/@salarai123" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3c.4 2.2 1.9 3.7 4 3.9v2.9c-1.5 0-2.9-.5-4-1.3v6.4c0 3.3-2.6 5.9-5.9 5.9S4.7 18.2 4.7 14.9c0-3.1 2.4-5.6 5.4-5.9v3c-1.4.3-2.4 1.5-2.4 2.9 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9V3z" fill="var(--lime)" stroke="none"></path></svg></div>
+        <div><h4>TikTok</h4><p>@salarai123</p></div>
+      </a>
+      <a class="contact-card" href="https://www.facebook.com/share/1E6gAtuVAL/" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.6C16.7 3.55 15.7 3.5 14.5 3.5c-2.5 0-4.2 1.5-4.2 4.3V10H7.6v3.1h2.7V21z" fill="var(--lime)" stroke="none"></path></svg></div>
+        <div><h4>Facebook</h4><p>salar.ahsan</p></div>
+      </a>
+      <a class="contact-card" href="https://www.instagram.com/salar_ahsan3/" target="_blank" rel="noopener">
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle></svg></div>
+        <div><h4>Instagram</h4><p>@salar_ahsan3</p></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>© 2026 <span>Salar Ahsan</span> — Data Solutions Developer, Mandi Bahaudin, Pakistan</footer>
+</div>
+
+<script>
+/* ------------- process section scroll highlight ------------- */
+(function(){
+  const words = document.querySelectorAll('.process-word');
+  if(!words.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('active', entry.isIntersecting);
+    });
+  }, {threshold:0.6});
+  words.forEach(w => io.observe(w));
+})();
+
+/* ------------- hero 3D parallax ------------- */
+(function(){
+  const card = document.getElementById('photoCard');
+  const nameBg = document.getElementById('nameBg');
+  const photo = document.getElementById('heroPhoto');
+  if(!card) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!reduced && matchMedia('(pointer:fine)').matches){
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateY(${px*7}deg) rotateX(${-py*7}deg)`;
+      photo.style.transform = `translateZ(60px) translate(${px*-14}px, ${py*-10}px)`;
+      nameBg.style.transform = `translateY(-50%) translateZ(6px) translate(${px*10}px, ${py*6}px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      photo.style.transform = 'translateZ(60px)';
+      nameBg.style.transform = 'translateY(-50%) translateZ(6px)';
+    });
+  }
+
+  if(!reduced){
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if(y < 900){
+        nameBg.style.opacity = String(Math.max(0.5, 0.94 - y/1400));
+        photo.style.filter = `brightness(${1 - y/2600})`;
+      }
+    }, {passive:true});
+  }
+
+  const words = ['Analyze.', 'Automate.', 'Deliver.'];
+  let wi = 0;
+  const rotator = document.getElementById('wordRotator');
+  if(rotator){
+    setTimeout(() => rotator.classList.add('show'), 900);
+    setInterval(() => {
+      rotator.classList.remove('show');
+      setTimeout(() => {
+        wi = (wi+1) % words.length;
+        rotator.innerHTML = words[wi].replace('.', '<span>.</span>');
+        rotator.classList.add('show');
+      }, 400);
+    }, 2600);
+  }
+})();
+
+/* ------------- project data ------------- */
+const projects = [
+  {t:"Smart-Clean AI Data Agent Enterprise Pro", d:"Enterprise-grade autonomous data agent that audits, profiles and sanitizes massive corporate datasets — isolating anomalies and refactoring dirty pipelines.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Smart-Clean%20AI%20Data%20Agent%20Enterprise%20Pro.mp4"},
+  {t:"Dubbed Dose Pro STUDIO", d:"Video clipping & post-production engine that automates high-engagement crop selections for cinematic assets.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Dubbed%20Dose%20Pro%20STUDIO.mp4"},
+  {t:"Viral AI Content Automation Engine", d:"SEO copywriting & viral asset generation engine built on Google AI Studio to scale organic traffic loops.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Viral%20AI%20content.mp4"},
+  {t:"Advanced RAG Knowledge Base Engine", d:"Retrieval-Augmented Generation pipeline parsing unstructured archives for real-time knowledge synthesis.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/RAG.mp4"},
+  {t:"BazaarPulse AI Local Inventory", d:"WhatsApp bot simulation that maps and processes local supplier inventories through parsing automation.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/_BAZAARPULSE%20AI%20(WhatsApp%20Bot%20Sim).mp4"},
+  {t:"Smart Crop Weed Spotter & Calculator", d:"AgTech vision algorithm detecting weed spread in crop rows and calculating coverage for targeted remediation.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/SMART%20CROP%20WEED%20SPOTTER.mp4"},
+  {t:"The i3 Ghost Matrix v5.2", d:"Agent logic system built to autonomously challenge standard computational loops with aggressive reasoning paths.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Most%20disrespectful%20AI%20tool%20%F0%9F%92%80.mp4"},
+  {t:"Dark-Patterns Consumer Shield", d:"Security runtime auditing digital interfaces in real time to detect deceptive UI elements and tracking hooks.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Dark-Patterns%20Consumer%20Shield.mp4"},
+  {t:"DeepVerify AI: Anti-Deepfake Node", d:"Forensic verification node analyzing media to flag synthesized facial inconsistencies and deepfakes.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/DEEPVERIFY%20AI_%20ANTI-DEEPFAKE%20NODE.mp4"},
+  {t:"AffiliStream AI: Serverless Asset Bucket", d:"Scalable serverless asset storage system processing synchronous data streams across affiliate networks.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/AFFILISTREAM%20AI_%20SERVERLESS%20ASSET%20BUCKET.mp4"},
+  {t:"Airlock AI: Isolated ICS Protocol Builder", d:"Offline cyber-security framework builder for Industrial Control Systems — sandboxed, air-gapped protocols.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/%F0%9F%94%92%20Airlock%20AI_%20Offline%20Cyber-Security%20Protocol%20Builder%20for%20ICS.mp4"},
+  {t:"FinPulse AI: HF Limit Order Book Matrix", d:"High-frequency quantitative engine mapping order book matrices and market depth spreads with low-latency logic.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/%F0%9F%92%B9%20FINPULSE%20AI_%20HF%20LIMIT%20ORDER%20BOOK%20MATRIX.mp4"},
+  {t:"Code Shrink Token Decimator", d:"Developer utility that compresses source code, discarding redundancy to optimize prompt context windows.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/code-shrink-token-decimator.mp4"},
+  {t:"SmolKin: Infant Care Edge Assistant v1.0", d:"Edge-deployed multimodal AI tracking and reporting real-time infant health indicators on localized systems.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/%60%F0%9F%91%B6%20SMOLKIN_%20AI%20FOR%20INFANT%20CARE!2.mp4"},
+  {t:"Hugging Face Hackathon Retail AI Agent", d:"Conversational AI for structured retail workflows, pricing logic audits and user intent synthesis.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/hugging%20face.mp4"},
+  {t:"AI Carousel Generator", d:"Automated tool generating engaging social media carousels using AI-driven content and design logic.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/carousel.mp4"},
+  {t:"ClearStock AI (Claude Powered)", d:"Built on Claude — creates targeted marketing campaigns to help businesses move old or dead stock.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/claude%20ai%201.mp4"},
+  {t:"Base44 AI Business Forecast", d:"AI tool for business owners predicting trends with data-driven forecasting models.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Base44.mp4"},
+  {t:"AI Analyst Tool", d:"AI-driven application that analyzes data patterns and produces intelligent summaries instantly.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/AI%20Analyst%20.mp4"},
+  {t:"Affiliate Agent Auto-Sync", d:"Real-time automation connecting affiliate agents to Google Sheets via n8n.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/AI%20Agent.mp4"},
+  {t:"Google Opal Integration", d:"Advanced reasoning and data synthesis workflows using Google Opal models.", v:"https://huggingface.co/datasets/salarahsan6/portfolio-videos/resolve/main/Google%20Opal.mp4"},
+];
+
+const grid = document.getElementById('projGrid');
+projects.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'proj-card';
+  card.setAttribute('data-reveal','');
+  card.innerHTML = `
+    <div class="proj-media">
+      <video data-src="${p.v}" muted loop playsinline preload="none"></video>
+      <div class="proj-play"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-index">${String(i+1).padStart(2,'0')} / ${projects.length}</div>
+      <div class="proj-title">${p.t}</div>
+      <div class="proj-desc">${p.d}</div>
+      <div class="proj-links"><a href="${p.v}" target="_blank" rel="noopener">Watch full video ↗</a></div>
+    </div>`;
+  grid.appendChild(card);
+
+  const video = card.querySelector('video');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        video.src = video.dataset.src;
+        io.disconnect();
+      }
+    });
+  }, {rootMargin:'400px'});
+  io.observe(card);
+
+  card.addEventListener('mouseenter', () => { if(video.src) video.play().catch(()=>{}); });
+  card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+});
+
+/* -------- two extra non-video cards: Salar Vision + Forage -------- */
+const extra1 = document.createElement('div');
+extra1.className = 'proj-card';
+extra1.setAttribute('data-reveal','');
+extra1.innerHTML = `
+  <div class="proj-media" style="background:linear-gradient(150deg,#1a2314,#0d0f0c);">
+    <div style="font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--lime);">Salar Vision AI</div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-index">22 / 23</div>
+    <div class="proj-title">Salar Vision AI Chatbot</div>
+    <div class="proj-desc">Custom AI app powered by Mistral and FLUX for conversational responses and image generation.</div>
+    <div class="proj-links"><a href="https://salarahsan6-salar-new-bot.hf.space" target="_blank" rel="noopener">Try it live ↗</a></div>
+  </div>`;
+grid.appendChild(extra1);
+
+const extra2 = document.createElement('div');
+extra2.className = 'proj-card';
+extra2.setAttribute('data-reveal','');
+extra2.innerHTML = `
+  <div class="proj-media" style="background:linear-gradient(150deg,#1a2314,#0d0f0c);">
+    <div style="font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--lime);">Forage</div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-index">23 / 23</div>
+    <div class="proj-title">Forage Data Analytics Simulation</div>
+    <div class="proj-desc">Completed professional engineering job simulation on Forage — certified completion.</div>
+    <div class="proj-links"><a href="https://huggingface.co/spaces/salarahsan6/myportfolio/resolve/main/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_69440dc052959d1400e63d4f_1766144710825_completion_certificate.pdf" target="_blank" rel="noopener">View certificate ↗</a></div>
+  </div>`;
+grid.appendChild(extra2);
+
+/* ------------- custom cursor ------------- */
+const cursor = document.getElementById('cursor');
+if(matchMedia('(pointer:fine)').matches){
+  window.addEventListener('mousemove', e => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  });
+  document.querySelectorAll('a, .proj-card, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+  });
+}
+
+/* ------------- scroll reveal ------------- */
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealIO.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+document.querySelectorAll('[data-reveal]').forEach(el => revealIO.observe(el));
+</script>
+
+</body>
+</html>
