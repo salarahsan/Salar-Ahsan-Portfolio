@@ -81,76 +81,84 @@
   /* ---------------- hero ---------------- */
   .hero{ padding:36px 0 60px; }
 
-  .photo-card{
+  .hero-card{
     position:relative;
     background:linear-gradient(155deg, var(--paper2), var(--paper));
     border-radius:26px;
     overflow:hidden;
-    min-height:520px;
-    padding:26px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    padding:50px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:36px;
+    align-items:center;
     color:var(--ink);
     perspective:1400px;
-    transform-style:preserve-3d;
-    transition:transform .1s linear;
-    will-change:transform;
   }
+
+  .hero-left{ position:relative; z-index:4; }
+  .hero-left h1{
+    font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.02em;
+    font-size:clamp(34px, 4.6vw, 58px); line-height:1.05; margin:20px 0 6px;
+  }
+  .hero-left h1 em{ font-style:italic; font-weight:500; }
+  .role-line{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--lime-dim); margin-bottom:18px;
+  }
+  .hero-sub{ max-width:460px; font-size:15.5px; color:#4c5544; line-height:1.65; }
+  .hero-row{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:30px; }
+  .hero-stats{ display:flex; gap:34px; margin-top:40px; padding-top:26px; border-top:1px solid rgba(20,23,15,0.14); }
+  .hero-stats h4{ font-family:'Fraunces',serif; font-size:22px; color:var(--ink); }
+  .hero-stats p{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:#6a7360; margin-top:4px; }
+
+  .photo-chip{
+    display:inline-block;
+    font-family:var(--mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+    background:rgba(20,23,15,0.06); border:1px solid rgba(20,23,15,0.14);
+    padding:8px 15px; border-radius:100px; color:var(--ink);
+  }
+
+  .hero-right{ position:relative; display:flex; align-items:center; justify-content:center; z-index:3; }
+  .loc-chip{ position:absolute; top:0; right:0; z-index:6; background:var(--paper2); }
   .orbit-ring{
-    position:absolute; border:1px solid rgba(20,23,15,0.16); border-radius:50%;
-    pointer-events:none; z-index:2;
+    position:absolute; border:1px dashed rgba(20,23,15,0.18); border-radius:50%;
+    width:340px; height:340px; top:50%; left:50%; margin:-170px 0 0 -170px;
+    pointer-events:none; z-index:1;
+    animation:spinRing 30s linear infinite;
   }
-  .ring1{ width:420px; height:420px; top:8%; left:50%; margin-left:-210px; animation:spinRing 30s linear infinite; border-style:dashed; }
-  .ring2{ width:300px; height:300px; bottom:6%; right:6%; animation:spinRing 22s linear infinite reverse; }
   @keyframes spinRing{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
 
-  .photo-row{ display:flex; align-items:flex-start; justify-content:space-between; position:relative; z-index:5; transform:translateZ(30px); }
-  .photo-chip{
-    font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
-    background:rgba(20,23,15,0.06); border:1px solid rgba(20,23,15,0.14);
-    padding:9px 16px; border-radius:100px; color:var(--ink);
+  .photo-frame{
+    position:relative; z-index:3;
+    width:100%; max-width:320px; aspect-ratio:4/5;
+    background:linear-gradient(160deg, #dfd9c4, #cfc8ac);
+    border-radius:22px;
+    border:1px solid rgba(20,23,15,0.12);
+    box-shadow:0 30px 60px -24px rgba(20,23,15,0.35);
+    overflow:hidden;
+    display:flex; align-items:flex-end; justify-content:center;
+    transform:translateZ(20px);
   }
-  .photo-name-bg{
-    position:absolute; left:0; right:0; top:50%; transform:translateY(-50%) translateZ(6px);
-    font-family:'Fraunces',serif; font-weight:700; letter-spacing:-0.02em;
-    font-size:clamp(58px, 12vw, 150px); line-height:0.85; color:var(--ink);
-    opacity:0.94; white-space:nowrap; z-index:1; text-align:center;
-    animation:breathe 6s ease-in-out infinite;
-  }
-  @keyframes breathe{ 0%,100%{ letter-spacing:-0.02em; opacity:0.94; } 50%{ letter-spacing:-0.005em; opacity:1; } }
-
   .hero-photo{
-    position:relative; z-index:3; margin:0 auto; height:460px; width:auto;
-    -webkit-mask-image:linear-gradient(to bottom, black 82%, transparent 100%);
-    mask-image:linear-gradient(to bottom, black 82%, transparent 100%);
-    object-fit:contain; object-position:bottom;
-    transform:translateZ(60px);
-    filter:drop-shadow(0 30px 40px rgba(20,23,15,0.25));
+    width:100%; height:100%; object-fit:cover; object-position:top center;
   }
 
   .word-rotator{
-    position:absolute; z-index:6; top:44%; left:8%;
+    position:absolute; z-index:6; bottom:14px; left:14px;
     font-family:'Fraunces',serif; font-style:italic; font-weight:500;
-    font-size:clamp(18px,2.6vw,26px); color:var(--ink);
-    transform:translateZ(80px);
-    opacity:0; transition:opacity .4s ease, transform .4s ease;
+    font-size:15px; color:var(--paper2);
+    background:rgba(20,23,15,0.55); backdrop-filter:blur(6px);
+    padding:7px 14px; border-radius:100px;
+    opacity:0; transition:opacity .4s ease;
   }
-  .word-rotator span{ color:var(--lime-dim); }
+  .word-rotator span{ color:var(--lime); }
   .word-rotator.show{ opacity:1; }
 
-  .photo-foot{ display:flex; align-items:flex-end; justify-content:space-between; position:relative; z-index:5; transform:translateZ(30px); }
-  .photo-foot .role{ font-family:'Fraunces',serif; font-style:italic; font-size:19px; }
-  .photo-foot .scroll{ font-family:var(--mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:6px; opacity:.7; }
-  .photo-foot .scroll .arrow{ display:inline-block; animation:bounceArrow 1.6s ease-in-out infinite; }
-  @keyframes bounceArrow{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
-
-  @media (max-width:720px){
-    .photo-card{ min-height:auto; padding:20px; }
-    .hero-photo{ height:300px; }
-    .photo-name-bg{ font-size:clamp(38px,14vw,70px); }
-    .word-rotator{ display:none; }
-    .orbit-ring{ display:none; }
+  @media (max-width:860px){
+    .hero-card{ grid-template-columns:1fr; padding:30px; }
+    .hero-right{ order:-1; }
+    .photo-frame{ max-width:220px; }
+    .hero-stats{ gap:24px; }
   }
 
   .eyebrow{
@@ -256,16 +264,61 @@
   .pill{ display:inline-block; border:1px solid var(--line); padding:9px 16px; border-radius:100px; font-size:13.5px; margin:0 8px 8px 0; color:var(--cream); }
 
   /* ---------------- contact ---------------- */
-  .contact-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
-  .contact-card{
-    border:1px solid var(--line); border-radius:16px; padding:22px; text-decoration:none;
-    display:flex; flex-direction:column; gap:30px; transition:border-color .25s ease, transform .25s ease, background .25s ease;
+  /* ---------------- contact (landing-style) ---------------- */
+  .contact-hero{
+    position:relative;
+    background:linear-gradient(155deg, #eef6ee, #dcecdd);
+    border-radius:26px;
+    overflow:hidden;
+    padding:54px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:30px;
+    align-items:center;
+    color:#12211a;
   }
-  .contact-card:hover{ border-color:var(--line-hover); transform:translateY(-3px); background:var(--panel); }
-  .contact-card .ic{ width:38px; height:38px; border-radius:10px; background:var(--panel); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
-  .contact-card .ic svg{ width:18px; height:18px; stroke:var(--lime); fill:none; stroke-width:1.8; }
-  .contact-card h4{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; }
-  .contact-card p{ font-family:var(--mono); font-size:11px; color:var(--muted); }
+  .contact-hero-left{ position:relative; z-index:3; }
+  .contact-h2{
+    font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.02em;
+    font-size:clamp(30px,4.2vw,46px); line-height:1.08; margin:14px 0 16px; color:#12211a;
+  }
+  .contact-p{ max-width:420px; font-size:15px; line-height:1.65; color:#3d4d40; margin-bottom:28px; }
+
+  .contact-hero-right{ position:relative; display:flex; align-items:center; justify-content:center; min-height:280px; }
+  .chb{
+    position:absolute; z-index:4;
+    width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#fff; box-shadow:0 14px 28px -10px rgba(18,33,26,0.3);
+    animation:chbFloat 4.5s ease-in-out infinite;
+  }
+  .chb svg{ width:24px; height:24px; stroke:#12211a; fill:none; stroke-width:1.8; }
+  .chb1{ top:12%; left:16%; background:var(--lime); animation-delay:0s; }
+  .chb1 svg{ stroke:#12211a; }
+  .chb2{ top:6%; right:14%; background:#ffd88a; animation-delay:1s; }
+  .chb3{ bottom:16%; left:6%; background:#9fd8ff; animation-delay:2s; }
+  .chb4{ bottom:8%; right:20%; background:#f4a7c0; animation-delay:1.6s; }
+  @keyframes chbFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+
+  .trust-strip{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:22px;
+  }
+  .trust-item{
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.04em; text-transform:uppercase;
+    padding:12px 18px; border-radius:100px; text-decoration:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--cream);
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .trust-item svg{ width:15px; height:15px; stroke:var(--lime); fill:none; stroke-width:1.8; }
+  .trust-item:hover{ border-color:var(--line-hover); transform:translateY(-2px); }
+
+  @media (max-width:820px){
+    .contact-hero{ grid-template-columns:1fr; padding:30px; }
+    .contact-hero-right{ order:-1; min-height:200px; }
+    .chb{ width:42px; height:42px; }
+    .chb svg{ width:18px; height:18px; }
+  }
 
   footer{ padding:40px 0; text-align:center; font-family:var(--mono); font-size:11.5px; color:var(--muted); }
   footer span{ color:var(--lime); }
@@ -315,28 +368,31 @@
 <div class="wrap">
 
   <section class="hero">
-    <div class="photo-card" id="photoCard" data-reveal>
-      <div class="orbit-ring ring1"></div>
-      <div class="orbit-ring ring2"></div>
-      <div class="photo-row">
+    <div class="hero-card" id="photoCard" data-reveal>
+      <div class="hero-left">
         <div class="photo-chip">Available for freelance</div>
-        <div class="photo-chip">Mandi Bahaudin, PK 🇵🇰</div>
+        <h1>Hi, I'm <em>Salar Ahsan</em></h1>
+        <div class="role-line">Data Analyst &amp; AI Developer</div>
+        <p class="hero-sub">Google Certified Data Analyst turning raw, messy datasets into clear decisions — and building autonomous AI agents, dashboards and automations for clients around the world.</p>
+        <div class="hero-row">
+          <a href="#projects" class="btn btn-primary">View projects →</a>
+          <a href="mailto:salarahsan06@gmail.com" class="btn btn-ghost">Say hello</a>
+        </div>
+        <div class="hero-stats">
+          <div><h4>23+</h4><p>AI Projects</p></div>
+          <div><h4>Google</h4><p>Certified Analyst</p></div>
+          <div><h4>2026</h4><p>Active</p></div>
+        </div>
       </div>
-      <div class="photo-name-bg" id="nameBg">SALAR AHSAN</div>
-      <img class="hero-photo" id="heroPhoto" src="salar-cutout.png" alt="Salar Ahsan">
-      <div class="word-rotator" id="wordRotator">Analyze<span>.</span></div>
-      <div class="photo-foot">
-        <div class="role">Data Analyst &amp;<br>AI Developer</div>
-        <div class="scroll">Scroll<br><span class="arrow">↓</span></div>
-      </div>
-    </div>
 
-    <div class="eyebrow" data-reveal>Data Analyst · AI Automation Developer</div>
-    <h1 data-reveal>Turning raw data into <em>actionable insights</em> & intelligent tools.</h1>
-    <p class="hero-sub" data-reveal>Google Certified Data Analyst turning raw, messy datasets into clear decisions — and building autonomous AI agents, dashboards and automations for clients around the world.</p>
-    <div class="hero-row" data-reveal>
-      <a href="#projects" class="btn btn-primary">View projects →</a>
-      <a href="mailto:salarahsan06@gmail.com" class="btn btn-ghost">Say hello</a>
+      <div class="hero-right">
+        <div class="photo-chip loc-chip">Mandi Bahaudin, PK 🇵🇰</div>
+        <div class="orbit-ring ring1"></div>
+        <div class="photo-frame" id="photoFrame">
+          <img class="hero-photo" id="heroPhoto" src="salar_cutout.png" alt="Salar Ahsan">
+        </div>
+        <div class="word-rotator" id="wordRotator">Analyze<span>.</span></div>
+      </div>
     </div>
   </section>
 
@@ -425,45 +481,45 @@
   </section>
 
   <section class="section" id="contact" style="border-bottom:none;">
-    <div class="head" data-reveal>
-      <div>
-        <div class="num">04 — Contact</div>
-        <h2>Let's build<br>something.</h2>
+    <div class="contact-hero" data-reveal>
+      <div class="contact-hero-left">
+        <div class="num" style="color:#2f7a4d;">04 — Contact</div>
+        <h2 class="contact-h2">Let's build something<br>together.</h2>
+        <p class="contact-p">Open for freelance data &amp; AI automation projects — reach out and let's talk about what you're building.</p>
+        <a href="mailto:salarahsan06@gmail.com" class="btn btn-primary" style="background:#12351f; color:#eafbef;">Get in touch →</a>
       </div>
-      <p>Open for freelance data & AI automation projects.</p>
+      <div class="contact-hero-right">
+        <div class="chb chb1"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
+        <div class="chb chb2"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+        <div class="chb chb3"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.6L22 9.3l-5 4.9 1.2 7.1L12 17.8l-6.2 3.5L7 14.2 2 9.3l7.1-.7z"></path></svg></div>
+        <div class="chb chb4"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-13h-7z"></path></svg></div>
+      </div>
     </div>
-    <div class="contact-grid" data-reveal>
-      <a class="contact-card" href="mailto:salarahsan06@gmail.com">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
-        <div><h4>Email</h4><p>salarahsan06@gmail.com</p></div>
+
+    <div class="trust-strip" data-reveal>
+      <a class="trust-item" href="mailto:salarahsan06@gmail.com">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg> Email
       </a>
-      <a class="contact-card" href="https://www.linkedin.com/in/salar-ahsan-9b859839b/" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9.5 9H13v1.9h.05c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8-1.7 0-2 1.4-2 2.7V21h-4z" fill="var(--lime)" stroke="none"></path></svg></div>
-        <div><h4>LinkedIn</h4><p>salar-ahsan</p></div>
+      <a class="trust-item" href="https://www.linkedin.com/in/salar-ahsan-9b859839b/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9.5 9H13v1.9h.05c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8-1.7 0-2 1.4-2 2.7V21h-4z"></path></svg> LinkedIn
       </a>
-      <a class="contact-card" href="https://github.com/salarahsan" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.58 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" fill="var(--lime)" stroke="none"></path></svg></div>
-        <div><h4>GitHub</h4><p>salarahsan</p></div>
+      <a class="trust-item" href="https://github.com/salarahsan" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.58 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"></path></svg> GitHub
       </a>
-      <a class="contact-card" href="https://x.com/SalarAhsan9up6" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h4.4l4.1 5.6L16.3 3H21l-6.9 8.6L21.5 21H17l-4.5-6.1L7.2 21H2.5l7.3-9.1z" fill="var(--lime)" stroke="none"></path></svg></div>
-        <div><h4>X</h4><p>@SalarAhsan9up6</p></div>
+      <a class="trust-item" href="https://x.com/SalarAhsan9up6" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M3 3h4.4l4.1 5.6L16.3 3H21l-6.9 8.6L21.5 21H17l-4.5-6.1L7.2 21H2.5l7.3-9.1z"></path></svg> X
       </a>
-      <a class="contact-card" href="https://www.fiverr.com/salarahsan0?public_mode=true" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h9M9 3v6M9 9h6a3 3 0 0 1 0 6H9m0-6v9"></path></svg></div>
-        <div><h4>Fiverr</h4><p>salarahsan0</p></div>
+      <a class="trust-item" href="https://www.fiverr.com/salarahsan0?public_mode=true" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h9M9 3v6M9 9h6a3 3 0 0 1 0 6H9m0-6v9"></path></svg> Fiverr
       </a>
-      <a class="contact-card" href="https://www.tiktok.com/@salarai123" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3c.4 2.2 1.9 3.7 4 3.9v2.9c-1.5 0-2.9-.5-4-1.3v6.4c0 3.3-2.6 5.9-5.9 5.9S4.7 18.2 4.7 14.9c0-3.1 2.4-5.6 5.4-5.9v3c-1.4.3-2.4 1.5-2.4 2.9 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9V3z" fill="var(--lime)" stroke="none"></path></svg></div>
-        <div><h4>TikTok</h4><p>@salarai123</p></div>
+      <a class="trust-item" href="https://www.tiktok.com/@salarai123" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16.5 3c.4 2.2 1.9 3.7 4 3.9v2.9c-1.5 0-2.9-.5-4-1.3v6.4c0 3.3-2.6 5.9-5.9 5.9S4.7 18.2 4.7 14.9c0-3.1 2.4-5.6 5.4-5.9v3c-1.4.3-2.4 1.5-2.4 2.9 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9V3z"></path></svg> TikTok
       </a>
-      <a class="contact-card" href="https://www.facebook.com/share/1E6gAtuVAL/" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.6C16.7 3.55 15.7 3.5 14.5 3.5c-2.5 0-4.2 1.5-4.2 4.3V10H7.6v3.1h2.7V21z" fill="var(--lime)" stroke="none"></path></svg></div>
-        <div><h4>Facebook</h4><p>salar.ahsan</p></div>
+      <a class="trust-item" href="https://www.facebook.com/share/1E6gAtuVAL/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.6C16.7 3.55 15.7 3.5 14.5 3.5c-2.5 0-4.2 1.5-4.2 4.3V10H7.6v3.1h2.7V21z"></path></svg> Facebook
       </a>
-      <a class="contact-card" href="https://www.instagram.com/salar_ahsan3/" target="_blank" rel="noopener">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle></svg></div>
-        <div><h4>Instagram</h4><p>@salar_ahsan3</p></div>
+      <a class="trust-item" href="https://www.instagram.com/salar_ahsan3/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle></svg> Instagram
       </a>
     </div>
   </section>
@@ -487,9 +543,8 @@
 /* ------------- hero 3D parallax ------------- */
 (function(){
   const card = document.getElementById('photoCard');
-  const nameBg = document.getElementById('nameBg');
-  const photo = document.getElementById('heroPhoto');
-  if(!card) return;
+  const frame = document.getElementById('photoFrame');
+  if(!card || !frame) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if(!reduced && matchMedia('(pointer:fine)').matches){
@@ -497,25 +552,11 @@
       const r = card.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width - 0.5;
       const py = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `rotateY(${px*7}deg) rotateX(${-py*7}deg)`;
-      photo.style.transform = `translateZ(60px) translate(${px*-14}px, ${py*-10}px)`;
-      nameBg.style.transform = `translateY(-50%) translateZ(6px) translate(${px*10}px, ${py*6}px)`;
+      frame.style.transform = `translateZ(20px) rotateY(${px*8}deg) rotateX(${-py*8}deg)`;
     });
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'rotateY(0deg) rotateX(0deg)';
-      photo.style.transform = 'translateZ(60px)';
-      nameBg.style.transform = 'translateY(-50%) translateZ(6px)';
+      frame.style.transform = 'translateZ(20px) rotateY(0deg) rotateX(0deg)';
     });
-  }
-
-  if(!reduced){
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if(y < 900){
-        nameBg.style.opacity = String(Math.max(0.5, 0.94 - y/1400));
-        photo.style.filter = `brightness(${1 - y/2600})`;
-      }
-    }, {passive:true});
   }
 
   const words = ['Analyze.', 'Automate.', 'Deliver.'];
